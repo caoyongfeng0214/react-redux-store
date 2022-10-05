@@ -1,0 +1,23 @@
+{
+    "name": "react-redux-store",
+    "version": "1.0.0",
+    "description": "dynamic inject and remove reducer(s).",
+    "main": "index.js",
+    "scripts": {
+      "test": "echo \"Error: no test specified\" && exit 1"
+    },
+    "author": "CYF <caoyongfeng0214@gmail.com>",
+    "homepage": "https://github.com/caoyongfeng0214/react-redux-store",
+    "repository": {
+      "type": "git",
+      "url": "git+https://github.com/caoyongfeng0214/react-redux-store.git"
+    },
+    "license": "Apache-2.0",
+    "keywords": [
+      "react-redux",
+      "store",
+      "split reducers"
+    ],
+    "dependencies": {
+    }
+}
