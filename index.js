@@ -19,7 +19,7 @@ store.add = (...slices) => {
 
 store.remove = (...nameOrSlices) => {
     nameOrSlices.forEach(T => {
-        let name = typeof(nameOrSlices) === 'string' ? nameOrSlices : nameOrSlices.name;
+        let name = typeof(T) === 'string' ? T : T.name;
         if(name) {
             delete store.asyncReducers[name];
         }
