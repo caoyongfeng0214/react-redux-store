@@ -1,4 +1,5 @@
-import { configureStore, combineReducers } from "@reduxjs/toolkit";
+import { useDispatch } from "react-redux";
+import { configureStore, combineReducers, createSlice as Slice } from "@reduxjs/toolkit";
 
 const store = configureStore({
     reducer: () => {}
@@ -11,8 +12,10 @@ store.add = (...slices) => {
         let name = slice.name;
         if(name && !store.asyncReducers[name]) {
             let reducer = slice.reducer;
-            store.asyncReducers[name] = reducer;
-            store.replaceReducer(combineReducers(store.asyncReducers));
+            if(reducer) {
+                store.asyncReducers[name] = reducer;
+                store.replaceReducer(combineReducers(store.asyncReducers));
+            }
         }
     });
 };
@@ -26,6 +29,28 @@ store.remove = (...nameOrSlices) => {
     });
     store.replaceReducer(combineReducers(store.asyncReducers));
 };
+
+
+const createSlice = ({ name, initialState, reducers, methods }) => {
+    const slice = Slice({
+        name,
+        initialState,
+        reducers
+    });
+
+    const useMethods = () => {
+        const dispatch = useDispatch();
+
+        return methods(dispatch, slice.actions);
+    };
+
+    slice.use = useMethods;
+
+    return slice;
+};
+
+
+store.createSlice = createSlice;
 
 
 export default store;
