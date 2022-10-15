@@ -49,6 +49,22 @@ export default usersSlice;
 ```
 
 
+### manually add a slice
+```js
+import store from "react-redux-store";
+import UsersSlice from "../reducers/usersSlice";
+
+store.add(UsersSlice);
+```
+
+### remove a slice
+```js
+import store from "react-redux-store";
+
+store.remove('users');
+```
+
+
 # Example
 
 `/src/index.js`
@@ -105,21 +121,4 @@ const Page1 = () => {
 };
 
 export default Page1;
-```
-
-
-
-### manually add a slice
-```js
-import store from "react-redux-store";
-import UsersSlice from "../reducers/usersSlice";
-
-store.add(UsersSlice);
-```
-
-### remove a slice
-```js
-import store from "react-redux-store";
-
-store.remove('users');
 ```
