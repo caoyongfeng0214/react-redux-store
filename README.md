@@ -26,6 +26,7 @@ import store from "react-redux-store";
 ```js
 import store from "react-redux-store";
 
+// Automatically added to Store
 const usersSlice = store.createSlice({
   name: 'users',
   initialState: [],
@@ -35,32 +36,16 @@ const usersSlice = store.createSlice({
     },
     // ... ...
   },
-  methods: (dispatch, { setValues }) => ({
+  methods: ({ setValues }) => ({
     async init() {
       const list = await UsersService.getAll();
-      dispatch(setValues(list));
-    }
+      setValues(list);
+    },
+    // ... ...
   })
 });
 
-// ... ...
-
 export default usersSlice;
-```
-
-### add a slice
-```js
-import store from "react-redux-store";
-import UsersSlice from "../reducers/usersSlice";
-
-store.add(UsersSlice);
-```
-
-### remove a slice
-```js
-import store from "react-redux-store";
-
-store.remove('users');
 ```
 
 
@@ -91,10 +76,10 @@ const UsersSlice = store.createSlice({
             return action.payload;
         }
     },
-    methods: (dispatch, { setValues }) => ({
+    methods: ({ setValues }) => ({
         async init() {
             let users = await UsersService.getAll(); // get all users from server
-            dispatch(setValues(users));
+            setValues(users);
         }
     })
 });
@@ -106,8 +91,6 @@ export default UsersSlice;
 ```js
 import store from "react-redux-store";
 import UsersSlice from "../slices/users";
-
-store.add(UsersSlice);
 
 const Page1 = () => {
     const Users = UsersSlice.use();
@@ -122,4 +105,21 @@ const Page1 = () => {
 };
 
 export default Page1;
+```
+
+
+
+### manually add a slice
+```js
+import store from "react-redux-store";
+import UsersSlice from "../reducers/usersSlice";
+
+store.add(UsersSlice);
+```
+
+### remove a slice
+```js
+import store from "react-redux-store";
+
+store.remove('users');
 ```

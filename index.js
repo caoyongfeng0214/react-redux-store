@@ -31,6 +31,14 @@ store.remove = (...nameOrSlices) => {
 };
 
 
+
+const _initAction = (dispatch, action) => {
+    return (...ps) => {
+        dispatch(action(...ps));
+    };
+};
+
+
 const createSlice = ({ name, initialState, reducers, methods }) => {
     const slice = Slice({
         name,
@@ -41,10 +49,19 @@ const createSlice = ({ name, initialState, reducers, methods }) => {
     const useMethods = () => {
         const dispatch = useDispatch();
 
-        return methods(dispatch, slice.actions);
+        let actions = {};
+        if(slice.actions) {
+            for(let k in slice.actions) {
+                actions[k] = _initAction(dispatch, slice.actions[k]);
+            }
+        }
+
+        return methods(actions);
     };
 
     slice.use = useMethods;
+
+    store.add(slice);
 
     return slice;
 };
