@@ -1,6 +1,6 @@
 {
     "name": "react-redux-store",
-    "version": "1.2.0",
+    "version": "1.2.1",
     "description": "dynamic inject and remove reducer(s).",
     "main": "index.js",
     "scripts": {

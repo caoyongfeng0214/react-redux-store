@@ -8,26 +8,34 @@ const store = configureStore({
 store.asyncReducers = {};
 
 store.add = (...slices) => {
+    let bl = false;
     slices.forEach(slice => {
         let name = slice.name;
         if(name && !store.asyncReducers[name]) {
             let reducer = slice.reducer;
             if(reducer) {
+                bl = true;
                 store.asyncReducers[name] = reducer;
-                store.replaceReducer(combineReducers(store.asyncReducers));
             }
         }
     });
+    if(bl) {
+        store.replaceReducer(combineReducers(store.asyncReducers));
+    }
 };
 
 store.remove = (...nameOrSlices) => {
+    let bl = false;
     nameOrSlices.forEach(T => {
         let name = typeof(T) === 'string' ? T : T.name;
-        if(name) {
+        if(name && store.asyncReducers[name]) {
+            bl = true;
             delete store.asyncReducers[name];
         }
     });
-    store.replaceReducer(combineReducers(store.asyncReducers));
+    if(bl) {
+        store.replaceReducer(combineReducers(store.asyncReducers));
+    }
 };
 
 
