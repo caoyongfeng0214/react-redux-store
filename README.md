@@ -1,6 +1,8 @@
 # react-redux-store
 dynamic inject and remove reducer(s).
 
+[![Node.js Package](https://github.com/caoyongfeng0214/react-redux-store/actions/workflows/npm-publish.yml/badge.svg)](https://github.com/caoyongfeng0214/react-redux-store/actions/workflows/npm-publish.yml)
+
 # Required
 react-redux
 
